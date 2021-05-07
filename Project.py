@@ -4,26 +4,37 @@ output how much you're paying towards interest rates and principle for each of y
 
 """
 """
-prin = 0
-rate = 0
-years = 0
 
-prin = int(input("What is the loan principle?:\n"))
-rate = float(input("What is the interest rate? ex (5%, input 0.05):\n"))
-years = int(input("How many years is the loan for?:\n"))
-n = years * 12
-
-total = prin*((1+(rate/(n)))**(n*years))
-print (total)
-
-print ("Payment #".ljust(20), "Payment Balance".ljust(20), "Payment Amount".ljust(20), "Interest Payed".ljust(20), "Ending Balance".ljust(20))
-
-
-#while(n <= years* 12):
 
 """
 
-#input("What kind of interest is the loan?\n")
+
+
+
+def SI():
+     input1 = input("Enter amount of loan: ") 
+     input2= input("Enter interest rate: ") 
+     input3 = input("Enter number of years: ") 
+     A=float(input1) # Principle
+     r=float(input2) # rate
+     n=float(input3) # years
+     cb = A #closing balance
+     SI = A*(1+(r/100)*n) #total payed after interest
+     print(SI)
+     mr = float(r/12) #interest per month
+     mp = SI/(n*12)  #monthly payment
+     print("Monthly Payment:", '$'+str('%.2f\n'%mp))
+     count = 0
+
+
+     print ("Payment #".ljust(20), "Payment Amount".ljust(20), "Interest Payed".ljust(20), "Principle Payed".ljust(20), "Ending Balance\n".ljust(20)) 
+     while (count < n*12):
+         count += 1
+         ip = ((mr/100)*cb) #Monthly interest payed
+         pp = SI - ip
+         cb = cb - pp
+         print(str(count).ljust(20), str('%.2f'%mp).ljust(20), str('%.2f'%ip).ljust(20), str('%.2f'%pp).ljust(20), str('%.2f'%cb).ljust(20)) 
+
 
 def Emi():
     input1 = input("Enter amount of loan: ") 
@@ -37,7 +48,7 @@ def Emi():
     i=r/1200
     emi=(A*i)/(1-(1+i)**(-12*n))
     print("Monthly Payment:",'$'+str('%.2f\n'%emi))
-    print ("Payment #".ljust(20), "Payment Amount".ljust(20), "Interest Payed".ljust(20), "Principle Payed".ljust(20), "Ending Balance\n".ljust(20)) 
+    print ("Payment #".ljust(20), "Payment Amount".ljust(20), "Interest Payed".ljust(20), "Principle Payed".ljust(20), "Ending Balance\n".ljust(20)) #Table heading
     count = 0
     print(str(cb).rjust(91))
 
@@ -50,5 +61,13 @@ def Emi():
         cb = cb - pp
         print(str(count).ljust(20), str('%.2f'%emi).ljust(20), str('%.2f'%ip).ljust(20), str('%.2f'%pp).ljust(20), str('%.2f'%cb).ljust(20)) 
         
-
-Emi()
+Method = ""
+Method = input("What kind of interest is the loan?\n Would you like EMI or SI (Simple Interest)?\n")
+if Method == "EMI":
+    print("You have Chosen EMI\n")
+    Emi()
+elif Method == "SI":
+    print("You have chosen Simple Interest\n")
+    SI()
+else:
+    print("Not Available")
