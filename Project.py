@@ -18,10 +18,9 @@ def SI():
      A=float(input1) # Principle
      r=float(input2) # rate
      n=float(input3) # years
-     cb = A #closing balance
-     SI = A*(1+(r/100)*n) #total payed after interest
-     print(SI)
-     mr = float(r/12) #interest per month
+     SI = A * (1+ (r/100)*n) #total payed after interest
+     cb = SI #closing balance
+     mr = float((SI - A)/(n*12)) #interest per month
      mp = SI/(n*12)  #monthly payment
      print("Monthly Payment:", '$'+str('%.2f\n'%mp))
      count = 0
@@ -30,10 +29,10 @@ def SI():
      print ("Payment #".ljust(20), "Payment Amount".ljust(20), "Interest Payed".ljust(20), "Principle Payed".ljust(20), "Ending Balance\n".ljust(20)) 
      while (count < n*12):
          count += 1
-         ip = ((mr/100)*cb) #Monthly interest payed
-         pp = SI - ip
+         pp = mp
          cb = cb - pp
-         print(str(count).ljust(20), str('%.2f'%mp).ljust(20), str('%.2f'%ip).ljust(20), str('%.2f'%pp).ljust(20), str('%.2f'%cb).ljust(20)) 
+         print(str(count).ljust(20), str('%.2f'%mp).ljust(20), str('%.2f'%mr).ljust(20), str('%.2f'%pp).ljust(20), str('%.2f'%cb).ljust(20)) 
+
 
 
 def Emi():
@@ -62,7 +61,7 @@ def Emi():
         print(str(count).ljust(20), str('%.2f'%emi).ljust(20), str('%.2f'%ip).ljust(20), str('%.2f'%pp).ljust(20), str('%.2f'%cb).ljust(20)) 
         
 Method = ""
-Method = input("What kind of interest is the loan?\n Would you like EMI or SI (Simple Interest)?\n")
+Method = input("What kind of interest is the loan?\n Would you like EMI (Equated monthly installment) or SI (Simple Interest)?\n")
 if Method == "EMI":
     print("You have Chosen EMI\n")
     Emi()
